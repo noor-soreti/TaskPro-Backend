@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+const server = require('./schema/index.js')
+
+
 
 mongoose.set('strictQuery', true);
 

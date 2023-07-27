@@ -5,8 +5,6 @@ const express = require('express')
 const app = express()
 const server = new ApolloServer({ typeDefs, resolvers })
 
-
-
 const port = 3000
 
 server.start().then(res => {
