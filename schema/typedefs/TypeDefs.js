@@ -1,30 +1,49 @@
-const { gql } = require('apollo-server-express')
+import { gql } from "apollo-server-express";
 
-const typeDefs = gql`
+/* 
+task: [Task!]!   
+ [] -> indicates this field represents a list or array of items
+ Task! -> type of each item if list/array and (!) indicates each item is non-nullable (list itself can be empty but each task should be valid)
+ ! -> list itself is non-nullable
+*/
+
+export const typeDefs = gql`
     # Types
         type User {
-            _id : ID
+            _id : ID!
             email: String!
-            password: String!
-            firstname: String!
-            lastname: String!
+            task: [Task!]! 
+        } 
+        type Task {
+            _id: ID!
+            title: String!
+            dueDate: String
+            setDate: String!
+            priority: Int
+            owner: User!
+        }
+        type AuthPayload {
+            user: User
         }
 
     # Query
         type Query {
-            getAllUsers: [User!]!
-            login(email: String!, password: String!): User
+            loginUser(email: String!, password: String!): AuthPayload
+            logoutUser: Boolean
         }
 
     # Mutation
     type Mutation {
-        register(
-            email: String!
+        createTask(
+            id: ID!, 
+            title: String!, 
+            dueDate: String, 
+            setDate: String!, 
+            priority: Int
+        ): Task
+        registerUser(
+            email: String!, 
             password: String!
-            firstname: String!
-            lastname: String!
-        ): User
+        ): AuthPayload
     }
 `
-
-module.exports = { typeDefs }
