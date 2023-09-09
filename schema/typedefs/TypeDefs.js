@@ -21,7 +21,7 @@ export const typeDefs = gql`
             dueDate: String
             setDate: String!
             priority: Int
-            owner: User!
+            ownerId: ID!
         }
         type AuthPayload {
             user: User
@@ -30,21 +30,34 @@ export const typeDefs = gql`
     # Query
         type Query {
             loginUser(email: String!, password: String!): AuthPayload
-            logoutUser: Boolean
+            getTasks: [Task]
+            currentUser: String
+            signOut: Boolean
         }
 
     # Mutation
     type Mutation {
-        createTask(
-            id: ID!, 
+        addTask(
+            id: ID
+            title: String!, 
+            setDate: String, 
+            dueDate: String, 
+            priority: Int,
+        ): Task
+
+        updateTask(
+            id: ID!,
             title: String!, 
             dueDate: String, 
-            setDate: String!, 
-            priority: Int
-        ): Task
+            setDate: String, 
+            priority: Int,
+        ): Task  
+
+        deleteTask: Boolean
+
         registerUser(
             email: String!, 
             password: String!
-        ): AuthPayload
+        ): Boolean
     }
 `

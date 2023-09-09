@@ -10,7 +10,6 @@ import { getFirestore } from "firebase/firestore";
 
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
-
 // Initialize Firebase
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -22,29 +21,32 @@ const firebaseConfig = {
     measurementId: process.env.MEASUREMENT_ID
 };
 
-
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 const auth = getAuth();
-
 
 const server = new ApolloServer({
     typeDefs,
     resolvers,
 })
 
+const getCurrentUser = async () => {
+    return new Promise((resolve) => {
+        onAuthStateChanged(auth, (user) => {
+            resolve(user ? user.uid : null);
+        });
+    });
+}
 
 await startStandaloneServer(server, {
     port: 4000,
-    context: async () => {
-        let currentUser = auth.currentUser
-        if (currentUser !== null) {
-            console.log(currentUser.email);
-        } else {
-            // console.log("NULL");
-        }
+    context: async ({ req, res }) => {
+        let currentUser = await getCurrentUser()
+        // console.log(currentUser);
+        const token = req.headers.authorization || ''
 
         return { db, auth, currentUser }
+
     }
 
 });
