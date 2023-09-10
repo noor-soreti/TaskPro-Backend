@@ -33,6 +33,7 @@ export const typeDefs = gql`
             getTasks: [Task]
             currentUser: String
             signOut: Boolean
+            testQuery: String
         }
 
     # Mutation

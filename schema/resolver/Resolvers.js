@@ -52,6 +52,10 @@ export const resolvers = {
             signOut(auth)
             return true
         },
+        testQuery: (_, args, context) => {
+            console.log("TEST QUERY");
+            return "testQuery"
+        }
     },
     Mutation: {
         registerUser: async (_, { email, password }, context) => {
