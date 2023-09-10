@@ -10,6 +10,8 @@ import { getFirestore } from "firebase/firestore";
 
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
+import { expressApp } from './app.js'
+
 // Initialize Firebase
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
