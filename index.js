@@ -12,6 +12,9 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 import { expressApp } from './app.js'
 
+const PORT = process.env.PORT || 5001
+
+
 // Initialize Firebase
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -41,7 +44,7 @@ const getCurrentUser = async () => {
 }
 
 await startStandaloneServer(server, {
-    port: 8000,
+    port: PORT,
     context: async ({ req, res }) => {
         let currentUser = await getCurrentUser()
         // console.log(currentUser);
