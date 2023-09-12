@@ -27,6 +27,8 @@ const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 const auth = getAuth();
 
+const PORT = process.env.PORT || 4000
+
 const server = new ApolloServer({
     typeDefs,
     resolvers,
@@ -41,10 +43,10 @@ const getCurrentUser = async () => {
 }
 
 await startStandaloneServer(server, {
-    // port: 8000,
+    listen: { port: PORT },
     context: async ({ req, res }) => {
         let currentUser = await getCurrentUser()
-        // console.log(currentUser);
+        console.log("currentUser");
         const token = req.headers.authorization || ''
 
         return { db, auth, currentUser }
