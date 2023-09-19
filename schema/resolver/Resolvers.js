@@ -49,6 +49,7 @@ export const resolvers = {
         signOut: (_, context) => {
             const { auth } = context;
             console.log(auth);
+            console.log("signOut");
             signOut(auth)
             return true
         },
