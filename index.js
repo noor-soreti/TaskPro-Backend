@@ -43,7 +43,7 @@ const getCurrentUser = async () => {
 }
 
 await startStandaloneServer(server, {
-    listen: { port: 4000 },
+    listen: { port: PORT },
     context: async ({ req }) => {
         let currentUser = await getCurrentUser()
         console.log(currentUser);
