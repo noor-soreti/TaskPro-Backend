@@ -43,10 +43,10 @@ const getCurrentUser = async () => {
 }
 
 await startStandaloneServer(server, {
-    listen: { port: PORT },
-    context: async ({ req, res }) => {
+    listen: { port: 4000 },
+    context: async ({ req }) => {
         let currentUser = await getCurrentUser()
-        console.log("currentUser");
+        console.log(currentUser);
         const token = req.headers.authorization || ''
 
         return { db, auth, currentUser }

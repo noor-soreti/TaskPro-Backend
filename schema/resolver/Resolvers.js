@@ -66,7 +66,7 @@ export const resolvers = {
 
             } catch (e) {
                 console.error('Registration error:', e.message);
-                throw new Error('Unable to register.');
+                throw new Error('Registration error:', e.message);
             }
         },
         addTask: async (_, { title, dueDate, setDate, priority }, context) => {
