@@ -37,7 +37,7 @@ const server = new ApolloServer({
 const getCurrentUser = async () => {
     return new Promise((resolve) => {
         onAuthStateChanged(auth, (user) => {
-            resolve(user ? user.uid : null);
+            resolve(user ? user.uid : "null");
         });
     });
 }
