@@ -12,7 +12,7 @@ export const resolvers = {
                     user: {
                         _id: user.uid,
                         email: user.email,
-                        password: "dkjdkslfkjslkdjflkj"
+                        password: user.password
                     }
                 };
             } catch (e) {
