@@ -17,7 +17,7 @@ export const resolvers = {
                 };
             } catch (e) {
                 console.error('Login error:', e.message);
-                throw new Error('Unable to log in.');
+                throw new Error('Unable to log in');
             }
 
         },
