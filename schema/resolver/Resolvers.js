@@ -3,24 +3,6 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, si
 
 export const resolvers = {
     Query: {
-        loginUser: async (_, { email, password }, context) => {
-            const { auth } = context;
-            try {
-                const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                const user = userCredential.user;
-                return {
-                    user: {
-                        _id: user.uid,
-                        email: user.email,
-                        password: "user.password"
-                    }
-                };
-            } catch (e) {
-                console.error('Login error:', e.message);
-                throw new Error('Unable to log in');
-            }
-
-        },
         getTasks: async (_, args, context) => {
 
             const { db, currentUser } = context
@@ -59,6 +41,24 @@ export const resolvers = {
         }
     },
     Mutation: {
+        loginUser: async (_, { email, password }, context) => {
+            const { auth } = context;
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                return {
+                    user: {
+                        _id: user.uid,
+                        email: user.email,
+                        password: "user.password"
+                    }
+                };
+            } catch (e) {
+                console.error('Login error:', e.message);
+                throw new Error('Unable to log in');
+            }
+
+        },
         registerUser: async (_, { email, password }, context) => {
             const { auth } = context
             try {

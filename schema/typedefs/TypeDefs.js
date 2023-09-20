@@ -29,7 +29,6 @@ export const typeDefs = gql`
 
     # Query
         type Query {
-            loginUser(email: String!, password: String!): AuthPayload
             getTasks: [Task]
             currentUser: String
             signOut: Boolean
@@ -38,6 +37,10 @@ export const typeDefs = gql`
 
     # Mutation
     type Mutation {
+        loginUser(
+            email: String!, 
+            password: String!
+        ): AuthPayload
         addTask(
             id: ID
             title: String!, 
