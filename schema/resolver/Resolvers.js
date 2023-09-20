@@ -55,7 +55,7 @@ export const resolvers = {
                 };
             } catch (e) {
                 console.error('Login error:', e.message);
-                throw new Error('Unable to log in ');
+                throw new Error('Unable to log in');
             }
 
         },
@@ -67,7 +67,7 @@ export const resolvers = {
 
             } catch (e) {
                 console.error('Registration error:', e.message);
-                throw new Error('Registration error:', e.message);
+                return new Error('Registration error:', e.message);
             }
         },
         addTask: async (_, { title, dueDate, setDate, priority }, context) => {
